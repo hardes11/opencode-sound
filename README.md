@@ -42,3 +42,7 @@ The plugin uses OpenCode's [server-side plugin system](https://opencode.ai/docs/
 Falls back to the [Yaru](https://github.com/ubuntu/yaru) sound theme if freedesktop sounds aren't available.
 
 Sounds are debounced (2s cooldown on asks, 3s on completion) to avoid spam.
+
+## License
+
+[MIT](LICENSE)

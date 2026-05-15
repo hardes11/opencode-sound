@@ -5,14 +5,14 @@ const ENABLED = process.env.OPENCODE_SOUND_ENABLED !== "0";
 const VOLUME = parseInt(process.env.OPENCODE_SOUND_VOLUME || "80", 10);
 
 const SOUNDS = {
-  ask_question: "/usr/share/sounds/freedesktop/stereo/dialog-information.oga",
-  ask_permission: "/usr/share/sounds/freedesktop/stereo/dialog-warning.oga",
+  ask_question: "/usr/share/sounds/freedesktop/stereo/message-new-instant.oga",
+  ask_permission: "/usr/share/sounds/freedesktop/stereo/message-new-instant.oga",
   answer_done: "/usr/share/sounds/freedesktop/stereo/complete.oga",
 };
 
 const YARU_SOUNDS = {
-  ask_question: "/usr/share/sounds/Yaru/stereo/dialog-question.oga",
-  ask_permission: "/usr/share/sounds/Yaru/stereo/dialog-warning.oga",
+  ask_question: "/usr/share/sounds/Yaru/stereo/message-new-instant.oga",
+  ask_permission: "/usr/share/sounds/Yaru/stereo/message-new-instant.oga",
   answer_done: "/usr/share/sounds/Yaru/stereo/complete.oga",
 };
 

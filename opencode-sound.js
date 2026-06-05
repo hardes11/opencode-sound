@@ -2,7 +2,18 @@ import { exec } from "node:child_process";
 import { existsSync } from "node:fs";
 
 const ENABLED = process.env.OPENCODE_SOUND_ENABLED !== "0";
+const FORCE = process.env.OPENCODE_SOUND_FORCE === "1";
+const SUPPRESS_BACKGROUND = process.env.OPENCODE_SOUND_SUPPRESS_BACKGROUND !== "0";
 const VOLUME = parseInt(process.env.OPENCODE_SOUND_VOLUME || "80", 10);
+
+// Suppress sounds when stdout is not a terminal (background mode, pipes, subagents)
+const IS_INTERACTIVE = process.stdout.isTTY;
+
+function shouldSuppress() {
+  if (FORCE) return false;
+  if (!IS_INTERACTIVE && SUPPRESS_BACKGROUND) return true;
+  return false;
+}
 
 const SOUNDS = {
   ask_question: "/usr/share/sounds/freedesktop/stereo/message-new-instant.oga",
@@ -35,6 +46,7 @@ function detectPlayer() {
 
 function playSound(soundKey) {
   if (!ENABLED) return;
+  if (shouldSuppress()) return;
 
   let file = SOUNDS[soundKey];
   if (!existsSync(file)) {
@@ -68,7 +80,7 @@ export const OpencodeSoundPlugin = async (input) => {
       .catch(() => {});
   };
 
-  log(`Sound plugin initialized (enabled: ${ENABLED})`);
+  log(`Sound plugin initialized (enabled: ${ENABLED}, interactive: ${IS_INTERACTIVE}, background-suppress: ${SUPPRESS_BACKGROUND})`);
 
   return {
     event: async ({ event }) => {

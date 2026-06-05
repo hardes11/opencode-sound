@@ -59,7 +59,7 @@ Sounds are debounced (2s cooldown on asks, 3s on completion) to avoid spam.
 The [awesome-opencode](https://github.com/awesome-opencode/awesome-opencode) ecosystem has 9+ sound/notification plugins (opencode-notifier, opencode-notificator, opencode-ntfy.sh, opencode-smart-voice-notify, and more). **None of them suppress sounds in background/CLI mode.** They all focus on features this plugin deliberately avoids: desktop notifications, TTS, Telegram push, focus detection, per-project sound themes, and quiet hours.
 
 This plugin is intentionally minimal:
-- **<100 lines** — auditable in 2 minutes
+- **~100 lines** — auditable in 2 minutes
 - **No dependencies** — uses only Node.js built-ins
 - **No desktop notifications** — plays system sounds only
 - **Unique feature**: detects non-interactive mode (pipes, background sessions, subagents) and suppresses sounds automatically

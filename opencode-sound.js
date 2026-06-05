@@ -46,7 +46,11 @@ function detectPlayer() {
 
 function playSound(soundKey) {
   if (!ENABLED) return;
-  if (shouldSuppress()) return;
+  if (shouldSuppress()) {
+    console.error(`[opencode-sound] suppressed ${soundKey} (isTTY=${process.stdout.isTTY})`);
+    return;
+  }
+  console.error(`[opencode-sound] playing ${soundKey} (isTTY=${process.stdout.isTTY})`);
 
   let file = SOUNDS[soundKey];
   if (!existsSync(file)) {
@@ -81,6 +85,7 @@ export const OpencodeSoundPlugin = async (input) => {
   };
 
   log(`Sound plugin initialized (enabled: ${ENABLED}, interactive: ${IS_INTERACTIVE}, background-suppress: ${SUPPRESS_BACKGROUND})`);
+  console.error(`[opencode-sound] loaded — isTTY=${process.stdout.isTTY} suppress_background=${SUPPRESS_BACKGROUND}`);
 
   return {
     event: async ({ event }) => {
